@@ -1,3 +1,4 @@
+import 'package:da_exhib/screens/auth/auth.dart';
 import 'package:da_exhib/screens/auth/login.dart';
 import 'package:da_exhib/screens/auth/register.dart';
 import 'package:flutter/material.dart';
@@ -90,10 +91,8 @@ class Landing extends StatelessWidget {
                       child: FloatingActionButton(
                         backgroundColor: const Color(0xffFF512F),
                         onPressed: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const Login()));
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => Auth()));
                         },
                         child: const Icon(
                           FeatherIcons.arrowRight,

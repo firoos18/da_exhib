@@ -1,11 +1,18 @@
+import 'package:da_exhib/screens/Explore/explore.dart';
 import 'package:da_exhib/screens/auth/forgetpassword.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Login extends StatelessWidget {
-  const Login({super.key});
+class Login extends StatefulWidget {
+  final VoidCallback showRegisterPage;
+  Login({super.key, required this.showRegisterPage});
 
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,7 +165,12 @@ class Login extends StatelessWidget {
                             height: 48,
                             width: MediaQuery.of(context).size.width,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Explore()));
+                              },
                               style: FilledButton.styleFrom(
                                   elevation: 0,
                                   backgroundColor: const Color(0xffF09819),
@@ -184,12 +196,15 @@ class Login extends StatelessWidget {
                                 style: GoogleFonts.montserrat(
                                     fontSize: 12, fontWeight: FontWeight.w500),
                               ),
-                              Text(
-                                'Register',
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700,
-                                    color: const Color(0xffFF512F)),
+                              GestureDetector(
+                                onTap: widget.showRegisterPage,
+                                child: Text(
+                                  'Register',
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: const Color(0xffFF512F)),
+                                ),
                               ),
                             ],
                           )

@@ -1,12 +1,16 @@
-import 'package:da_exhib/screens/auth/landing.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Register extends StatelessWidget {
-  const Register({super.key});
+class Register extends StatefulWidget {
+  final VoidCallback showLoginPage;
+  Register({super.key, required this.showLoginPage});
 
+  @override
+  State<Register> createState() => _RegisterState();
+}
+
+class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -297,16 +301,19 @@ class Register extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
-                                'Don\'t have any account?',
+                                'Already have an account?',
                                 style: GoogleFonts.montserrat(
                                     fontSize: 12, fontWeight: FontWeight.w500),
                               ),
-                              Text(
-                                'Register',
-                                style: GoogleFonts.montserrat(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w700,
-                                    color: const Color(0xffFF512F)),
+                              GestureDetector(
+                                onTap: widget.showLoginPage,
+                                child: Text(
+                                  'Login',
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: const Color(0xffFF512F)),
+                                ),
                               ),
                             ],
                           )
