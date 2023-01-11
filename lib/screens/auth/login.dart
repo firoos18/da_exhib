@@ -1,4 +1,4 @@
-import 'package:da_exhib/screens/Explore/explore.dart';
+import 'package:da_exhib/screens/Nav/explore.dart';
 import 'package:da_exhib/screens/auth/forgetpassword.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
