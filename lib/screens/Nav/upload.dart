@@ -17,68 +17,25 @@ class _UploadState extends State<Upload> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: Text(
-            'Upload',
-            style: GoogleFonts.montserrat(
-                fontSize: 32, fontWeight: FontWeight.w500, color: Colors.black),
-          ),
+        elevation: 0,
+        title: Text(
+          'Upload',
+          style: GoogleFonts.montserrat(
+              fontSize: 32, fontWeight: FontWeight.w500, color: Colors.black),
         ),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.only(left: 32, right: 32, bottom: 20),
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(88),
-                color: const Color(0xffF09819)),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: GNav(
-                selectedIndex: 1,
-                onTabChange: (value) {
-                  if (value == 0) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Explore()));
-                  } else if (value == 2) {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Profile()));
-                  }
-                },
-                iconSize: 24,
-                textSize: 24,
-                padding: const EdgeInsets.all(8),
-                backgroundColor: const Color(0xffF09819),
-                tabBackgroundColor: const Color(0xffFF512F).withOpacity(0.5),
-                activeColor: Colors.white,
-                gap: 8,
-                // ignore: prefer_const_literals_to_create_immutables
-                tabs: [
-                  const GButton(
-                    icon: FeatherIcons.compass,
-                    text: 'Explore',
-                    iconColor: Colors.white,
-                    textColor: Colors.white,
-                  ),
-                  const GButton(
-                    icon: FeatherIcons.plusCircle,
-                    text: 'Upload',
-                    iconColor: Colors.white,
-                    textColor: Colors.white,
-                  ),
-                  const GButton(
-                    icon: FeatherIcons.user,
-                    text: 'Profile',
-                    iconColor: Colors.white,
-                    textColor: Colors.white,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ));
+      ),
+      body: SafeArea(
+          child: Padding(
+        padding: const EdgeInsets.only(top: 32, right: 24, left: 24),
+        child: Column(
+          children: [const Text('Upload')],
+        ),
+      )),
+    );
   }
 }

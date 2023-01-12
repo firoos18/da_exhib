@@ -1,5 +1,9 @@
+import 'package:da_exhib/components/artworktab.dart';
+import 'package:da_exhib/components/liketab.dart';
+import 'package:da_exhib/components/profiletab.dart';
 import 'package:da_exhib/screens/Nav/explore.dart';
 import 'package:da_exhib/screens/Nav/upload.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,111 +19,117 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-          preferredSize: Size(MediaQuery.of(context).size.width,
-              MediaQuery.of(context).size.height * 0.25),
-          child: Stack(children: [
-            AppBar(
-              automaticallyImplyLeading: false,
-              centerTitle: true,
-              backgroundColor: Colors.blue.shade50,
-              elevation: 5,
-              title: Text(
-                'Profile',
-                style: GoogleFonts.montserrat(
-                    fontSize: 32,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black),
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: PreferredSize(
+            preferredSize: Size(MediaQuery.of(context).size.width,
+                MediaQuery.of(context).size.height * 0.25),
+            child: Stack(children: [
+              AppBar(
+                automaticallyImplyLeading: false,
+                centerTitle: true,
+                backgroundColor: Colors.orangeAccent.shade200,
+                elevation: 5,
+                title: Text(
+                  'Profile',
+                  style: GoogleFonts.montserrat(
+                      fontSize: 32,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black),
+                ),
               ),
-            ),
-            Container(),
-            Positioned(
-              top: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Container(),
+              Positioned(
+                top: 100,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // ignore: prefer_const_literals_to_create_immutables
+                  children: [
+                    const CircleAvatar(
+                      radius: 60,
+                      backgroundImage: AssetImage('lib/assets/avatar.jpg'),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.1,
+                    ),
+                    Text(
+                      'Firoos',
+                      style: GoogleFonts.montserrat(
+                          fontSize: 20, fontWeight: FontWeight.bold),
+                    )
+                  ],
+                ),
+              ),
+            ]),
+          ),
+          body: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4),
+              child: Column(
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  const CircleAvatar(
-                    radius: 60,
-                    backgroundImage: AssetImage('lib/assets/avatar.jpg'),
+                  Center(
+                    child: TabBar(
+                      unselectedLabelColor: Colors.black.withOpacity(0.5),
+                      unselectedLabelStyle:
+                          TextStyle(color: Colors.black.withOpacity(0.3)),
+                      indicatorColor: Colors.amber,
+                      indicatorWeight: 3,
+                      isScrollable: true,
+                      tabs: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: Tab(
+                            child: Text(
+                              'Profile',
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: Tab(
+                            child: Text(
+                              'My Artworks',
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          child: Tab(
+                            child: Text('Likes',
+                                style: GoogleFonts.montserrat(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
+                                textAlign: TextAlign.center),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.1,
-                  ),
-                  Text(
-                    'Firoos',
-                    style: GoogleFonts.montserrat(
-                        fontSize: 20, fontWeight: FontWeight.bold),
+                  const Expanded(
+                    child: TabBarView(children: [
+                      ProfileTab(),
+                      ArtworkTab(),
+                      LikeTab(),
+                    ]),
                   )
                 ],
               ),
-            )
-          ]),
-        ),
-        body: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-          child: Column(
-            children: [Text('Profile')],
-          ),
-        )),
-        bottomNavigationBar: Padding(
-          padding: const EdgeInsets.only(left: 32, right: 32, bottom: 20),
-          child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(88),
-                color: const Color(0xffF09819)),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              child: GNav(
-                selectedIndex: 2,
-                onTabChange: (value) {
-                  if (value == 0) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Explore()));
-                  } else if (value == 1) {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Upload()));
-                  }
-                },
-                iconSize: 24,
-                textSize: 24,
-                padding: const EdgeInsets.all(8),
-                backgroundColor: const Color(0xffF09819),
-                tabBackgroundColor: const Color(0xffFF512F).withOpacity(0.5),
-                activeColor: Colors.white,
-                gap: 8,
-                // ignore: prefer_const_literals_to_create_immutables
-                tabs: [
-                  const GButton(
-                    icon: FeatherIcons.compass,
-                    text: 'Explore',
-                    iconColor: Colors.white,
-                    textColor: Colors.white,
-                  ),
-                  const GButton(
-                    icon: FeatherIcons.plusCircle,
-                    text: 'Upload',
-                    iconColor: Colors.white,
-                    textColor: Colors.white,
-                  ),
-                  const GButton(
-                    icon: FeatherIcons.user,
-                    text: 'Profile',
-                    iconColor: Colors.white,
-                    textColor: Colors.white,
-                  ),
-                ],
-              ),
             ),
-          ),
-        ));
-    ;
+          )),
+    );
   }
 }
